@@ -3,8 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { getConfig } from '@/lib/config';
 
-// export const runtime = 'nodejs';
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function GET(request: NextRequest) {
   try {
@@ -34,7 +33,8 @@ export async function GET(request: NextRequest) {
         : `${DanmakuApiBase}/${DanmakuApiToken}`;
 
     const apiUrl = `${baseUrl}/api/v2/search/anime?keyword=${encodeURIComponent(keyword)}`;
-
+    console.log("DEBUG: Requesting URL ->", apiUrl);
+    
     // 添加超时控制
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 30000); // 10秒超时
